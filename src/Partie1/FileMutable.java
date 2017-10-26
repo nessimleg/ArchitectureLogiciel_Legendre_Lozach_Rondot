@@ -28,10 +28,17 @@ public class FileMutable<T> implements Files<T>{
 	}
 
 	@Override
-	public void afficher() {
+	public String afficher() {
+		String results = "";
 		for (int i =0; i<this.file.size(); i++){
-			System.out.print(this.file.get(i)+ " ");
+			if (i!=this.file.size()-1){
+				results += this.file.get(i) + " ";
+			}	
+			else{
+				results += this.file.get(i) + "";
+			}
 		}
+		return results;
 	}
 
 	@Override

@@ -34,6 +34,8 @@ public class TestPartie1 {
 		
 		
 		
+		System.out.println("test");
+		
 		
 		
 		

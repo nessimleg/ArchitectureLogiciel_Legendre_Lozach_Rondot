@@ -19,14 +19,22 @@ public class TestPartie1 {
 		listeString.add("H");listeString.add("U");listeString.add("B");
 		FileMutable fileString = new FileMutable<String>(listeString);
 		
-		
-		fileChiffres.afficher();
-		fileString.afficher();
-		
-		
 		// Test Opérations
 		
+		fileNulle.ajout("elle");
+		fileNulle.ajout("n'est"); fileNulle.ajout("plus"); fileNulle.ajout("nulle");
 		
+		System.out.println("Test de ajout() : " + (fileNulle.size()!=0));
+		System.out.println("Test de afficher() : " + (("elle n'est plus nulle").equals(fileNulle.afficher())));
+		System.out.println("Test de tete() : " + (fileNulle.tete()=="elle"));
+		fileNulle.retrait();
+		System.out.println("Test de retrait() : " + (fileNulle.tete()=="n'est"));
+		System.out.println("Test de size() : " + (fileNulle.size()==3));
+
+		
+		
+		
+		System.out.println("testbranche");
 		
 		
 		

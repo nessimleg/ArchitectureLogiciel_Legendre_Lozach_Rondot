@@ -29,9 +29,10 @@ public interface Liste<E> extends Iterable<E> {
 	 * Services
 	 */
 	default Iterator<E> iterator() {
-		// TODO
 		return new IterateurListe<E>(); // Compléter puis utiliser IterateurListe.
 	}
+	
+	//complexite en o(n^2/2) avec n la longueur de la liste
 	default Liste<E> miroir(){
 		Liste<E> l1 = cons(this.tete(), vide());
 		Liste<E> l2 = this;
@@ -41,8 +42,6 @@ public interface Liste<E> extends Iterable<E> {
 		}
 		return l2;
 	}
-	
-	
 	
 	
 	/*

@@ -18,13 +18,11 @@ public interface FileImmutable<E> extends File<E> {
 	 */
 	@Override
 	default FileImmutable<E> ajout(E dernierDansFile) {
-		// TODO
-		return null;
+		return creer(dernierDansFile);
 	}
 	@Override
 	default FileImmutable<E> retrait() {
-		// TODO
-		return null;
+		return suivants();
 	}
 	// Complexité O(|secondeFile|)
 	@Override
@@ -34,6 +32,11 @@ public interface FileImmutable<E> extends File<E> {
 			r = r.ajout(e);
 		}
 		return r;
+	}
+	
+	
+	public static void main(String[] args){
+		
 	}
 
 }

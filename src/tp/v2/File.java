@@ -26,13 +26,23 @@ public interface File<E> extends Iterable<E> {
 	File<E> ajout(File<E> secondeFile);
 	
 	default String representation() {
-		// TODO 
-		return "";
+		return this.premier().toString()+this.suivants().representation();
 	}
 
 	default boolean estEgal(File<E> file){
-		// TODO
-		return true;
+		if(this.taille() != file.taille()){
+			return false;
+		}else{
+			if(this.taille() == 0 && file.taille() == 0){
+				return true;
+			}else{
+				if(this.premier().equals(file.premier())){
+					return this.suivants().estEgal(file.suivants());
+				}else{
+					return false;
+				}
+			}
+		}
 	}
 	
 	

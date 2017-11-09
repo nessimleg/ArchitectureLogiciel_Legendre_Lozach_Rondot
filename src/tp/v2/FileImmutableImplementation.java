@@ -9,6 +9,8 @@ public class FileImmutableImplementation<E> implements FileImmutable<E> {
 	
 	public FileImmutableImplementation() {
 		super();
+		this.debut = Liste.vide();
+		this.fin = Liste.vide();
 	}
 	
 	public FileImmutableImplementation(Liste<E> debut, Liste<E> fin) {

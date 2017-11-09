@@ -33,9 +33,18 @@ public interface Liste<E> extends Iterable<E> {
 		return null; // Compléter puis utiliser IterateurListe.
 	}
 	default Liste<E> miroir(){
-		// TODO
-		return null;
+		Liste<E> l1 = cons(this.tete(), vide());
+		Liste<E> l2 = this;
+		while (l1.taille()!=this.taille()) {
+			l1 = cons(l2.tete(), l1);
+			l2 = this.reste();
+		}
+		return l2;
 	}
+	
+	
+	
+	
 	/*
 	 * Fabriques (statiques)
 	 */

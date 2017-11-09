@@ -1,4 +1,4 @@
-package Partie1;
+package tp.v1;
 
 public interface Files <T>{
 	

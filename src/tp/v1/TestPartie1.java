@@ -1,4 +1,4 @@
-package Partie1;
+package tp.v1;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ public class TestPartie1 {
 		listeString.add("H");listeString.add("U");listeString.add("B");
 		FileMutable fileString = new FileMutable<String>(listeString);
 		
-		// Test Opérations
+		// Test Opï¿½rations
 		
 		fileNulle.ajout("elle");
 		fileNulle.ajout("n'est"); fileNulle.ajout("plus"); fileNulle.ajout("nulle");

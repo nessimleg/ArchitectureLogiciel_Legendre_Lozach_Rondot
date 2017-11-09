@@ -53,9 +53,6 @@ public interface Liste<E> extends Iterable<E> {
 			public boolean casVide() {
 				return true;
 			}
-			public boolean casCons() {
-				return false;
-			}
 		};
 	}
 	
@@ -63,9 +60,6 @@ public interface Liste<E> extends Iterable<E> {
 		return new Liste<E>() {
 			public boolean casCons() {
 				return true;
-			}
-			public boolean casVide() {
-				return false;
 			}
 		};
 	}

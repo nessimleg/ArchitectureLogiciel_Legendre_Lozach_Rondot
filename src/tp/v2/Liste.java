@@ -29,9 +29,10 @@ public interface Liste<E> extends Iterable<E> {
 	 * Services
 	 */
 	default Iterator<E> iterator() {
-		// TODO
 		return new IterateurListe<E>(); // Compléter puis utiliser IterateurListe.
 	}
+	
+	//complexite en o(n^2/2) avec n la longueur de la liste
 	default Liste<E> miroir(){
 		Liste<E> l1 = cons(this.tete(), vide());
 		Liste<E> l2 = this;
@@ -43,21 +44,29 @@ public interface Liste<E> extends Iterable<E> {
 	}
 	
 	
-	
-	
 	/*
 	 * Fabriques (statiques)
 	 */
 	
 	public static <E> Liste<E> vide() {
 		return new Liste<E>() {
-			// TODO Définir les méthodes utiles.			
+			public boolean casVide() {
+				return true;
+			}
+			public boolean casCons() {
+				return false;
+			}
 		};
 	}
 	
 	public static <E> Liste<E> cons(E t, Liste<E> r) {
 		return new Liste<E>() {
-			// TODO Définir les méthodes utiles.			
+			public boolean casCons() {
+				return true;
+			}
+			public boolean casVide() {
+				return false;
+			}
 		};
 	}
 	

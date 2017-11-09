@@ -1,4 +1,4 @@
-package Partie1;
+package tp.v1;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

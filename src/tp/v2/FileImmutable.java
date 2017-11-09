@@ -33,10 +33,6 @@ public interface FileImmutable<E> extends File<E> {
 		}
 		return r;
 	}
-	
-	
-	public static void main(String[] args){
-		
-	}
+
 
 }

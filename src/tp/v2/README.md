@@ -9,5 +9,5 @@ comparer leurs performances.
 Nous avons utilisé les conventions habituelles de nommage pour la conduite de 
 notre projet : http://www.iwombat.com/standards/JavaStyleGuide.html
 
-##Tests
+## Tests
 Dans la classe TestFile, nous avons testé notre implémentation.

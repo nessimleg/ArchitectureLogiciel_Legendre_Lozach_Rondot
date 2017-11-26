@@ -1,6 +1,6 @@
-package tp.v2;
+package tp.v3;
 
-public interface FileMutable<E> extends File<E> {
+public interface FileMutable<E> extends File<FileMutable<E>, E> {
 
 	/*
 	 * Accesseurs
@@ -19,9 +19,13 @@ public interface FileMutable<E> extends File<E> {
 	/*
 	 * Fabriques
 	 */
-	FileMutable<E> creer();
 	FileMutable<E> creerCopie();
 
+	@Override
+	default FileMutable<E> sujet() {
+		return this;
+	}
+	
 	/*
 	 * Services
 	 */
@@ -37,17 +41,7 @@ public interface FileMutable<E> extends File<E> {
 		return this;
 	}
 
-	// Complexité O(|secondeFile|)
-	@Override
-	default FileMutable<E> ajout(File<E> secondeFile) {
-		FileMutable<E> r = this;
-		for(E e : secondeFile){
-			r = r.ajout(e);
-		}
-		return r;
-	}
-
 	// Complexité en O(1).
-	void ajouter(File<E> secondeFile);
+	void ajouter(FileMutable<E> secondeFile);
 
 }

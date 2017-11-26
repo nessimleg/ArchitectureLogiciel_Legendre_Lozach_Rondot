@@ -1,13 +1,13 @@
-package tp.v2;
+package tp.v4;
 
 import java.util.Iterator;
 
-public class IterateurListe<E> implements Iterator<E> {
+public class IterateurSequence<K extends PossiblementVide & DecomposableSequentiellement<K, E>, E> implements Iterator<E> {
 
-	private Liste<E> courant;
+	private K courant; 
 
-	public IterateurListe(Liste<E> liste) {
-		this.courant = liste;
+	public IterateurSequence(K sequence) {
+		this.courant = sequence;
 	}
 
 	@Override

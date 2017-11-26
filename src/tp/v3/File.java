@@ -1,14 +1,14 @@
-package tp.v2;
+package tp.v3;
 
 import java.util.Iterator;
 
-public interface File<E> extends Iterable<E> {
+public interface File<K extends File<K, E>, E> extends Iterable<E> {
 
 	/*
 	 * Accesseurs
 	 */
 	E premier();
-	File<E> suivants();
+	K suivants();
 	
 	default boolean estVide() {
 		return this.taille() == 0;
@@ -18,14 +18,21 @@ public interface File<E> extends Iterable<E> {
 	/*
 	 * Fabriques
 	 */
-	File<E> creer();
+	K creer();
+	K sujet();
 	
 	/*
 	 * Services
 	 */
-	File<E> ajout(E dernierDansFile);
-	File<E> retrait();
-	File<E> ajout(File<E> secondeFile);
+	K ajout(E dernierDansFile);
+	K retrait();
+	default K ajout(K secondeFile){
+		K r = this.sujet();
+		for(E e : secondeFile){
+			r = r.ajout(e);
+		}
+		return r;
+	}
 	
 	default String representation() {
 		if (this.estVide()) {
@@ -43,7 +50,7 @@ public interface File<E> extends Iterable<E> {
 		return r.toString();
 	}
 
-	default boolean estEgal(File<E> file){
+	default boolean estEgal(K file){
 		if(this.taille() != file.taille()){
 			return false;
 		}

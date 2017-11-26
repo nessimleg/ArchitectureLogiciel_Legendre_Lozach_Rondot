@@ -1,4 +1,4 @@
-package tp.v2;
+package tp.v4;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.ThreadMXBean;
@@ -14,26 +14,30 @@ public class TestFile {
 	private static long diviseur = 100000;
 
 	public static void main(String[] args) {
-
-		FileMutable<Integer> file1 = new EnveloppeListeMutableDoubleAcces<>();
-		testerUsageLineaire(file1);
-
-		File<Integer> file = file1;
+		FileMutable<Integer> file = new EnveloppeListeMutableDoubleAcces<>();
 		tester(file);
 		testerUsageLineaire(file);
-		file = new EnveloppeDeuxListesImmutables<>();
-		tester(file);
-		testerUsageLineaire(file);
-
-		Queue<Integer> f = new LinkedList<>();
-		testerUsageLineaire(f);
-
-		file1 = new EnveloppeListeMutableDoubleAcces<>();
-		testerUsageLineaire(file1);
-
+		FileImmutable<Integer> fileI = new EnveloppeDeuxListesImmutables<>();
+		tester(fileI);
+		testerUsageLineaire(fileI);
+		testerAPI(new LinkedList<Integer>());
 	}
 
-	private static void tester(File<Integer> file) {
+	private static void testerAPI(Queue<Integer> file) {
+		int t = 11180000;
+		long time = threadBean.getCurrentThreadCpuTime();
+
+		for (int i = 0; i < t; i++) {
+			file.add(i);
+		}
+		for (int i = 0; i < t; i++) {
+			file.poll();
+		}
+
+		time = threadBean.getCurrentThreadCpuTime() - time;
+		System.out.println(file.getClass() + " - ajout/retrait: " + (time / diviseur));
+	}
+	private static <K extends File<K, Integer>> void tester(K file) {
 		int t = 10;
 
 		System.out.println("--------------------------------------------------------");
@@ -54,15 +58,15 @@ public class TestFile {
 		for (int i = 0; i < t; i++) {
 			file = file.ajout(i);
 		}
-		System.out.println(file);
+		System.out.println("0 1 ... " + (t-1) + " : " + file);
 		System.out.println("taille (" + t + ") : " + file.taille());
-		System.out.println("tete 0 : " + file.premier());
-		;
+		System.out.println("tete 0 : " + file.tete());
 		System.out.println("taille (" + t + ") : " + file.taille());
 		file = file.retrait();
-		System.out.println("tete 1 : " + file.premier());
+		System.out.println("tete 1 : " + file.tete());
 		System.out.println("vide (false) : " + file.estVide());
 		System.out.println("taille (" + (t - 1) + ") : " + file.taille());
+		System.out.print("1 ... " + (t-1) + " :");
 		for (int i : file) {
 			System.out.print(" " + i);
 		}
@@ -70,7 +74,7 @@ public class TestFile {
 	}
 
 	@SuppressWarnings("unused")
-	private static void testerUsageNonLineaire(File<Integer> file) {
+	private static <K extends File<K, Integer>> void testerUsageNonLineaire(K file) {
 		int t = 11180000;
 		long time = threadBean.getCurrentThreadCpuTime();
 
@@ -78,7 +82,7 @@ public class TestFile {
 			file = file.ajout(i);
 		}
 		for (int i = 0; i < t; i++) {
-			File<Integer> f = file.retrait();
+			K f = file.retrait();
 		}
 
 		time = threadBean.getCurrentThreadCpuTime() - time;
@@ -86,7 +90,7 @@ public class TestFile {
 
 	}
 
-	private static void testerUsageLineaire(File<Integer> file) {
+	private static <K extends File<K, Integer>> void testerUsageLineaire(K file) {
 		int t = 11180000;
 		long time = threadBean.getCurrentThreadCpuTime();
 
@@ -102,39 +106,6 @@ public class TestFile {
 
 	}
 
-	private static void testerUsageLineaire(FileMutable<Integer> file) {
-		int t = 11180000;
-		long time = threadBean.getCurrentThreadCpuTime();
-
-		for (int i = 0; i < t; i++) {
-			file.ajouter(i);
-		}
-		while (!file.estVide()) {
-			file.retirer();
-		}
-
-		time = threadBean.getCurrentThreadCpuTime() - time;
-		System.out.println(file.getClass() + " - ajout/retrait: " + (time / diviseur));
-
-	}
-	
-	private static void testerUsageLineaire(Queue<Integer> file) {
-		int t = 11180000;
-		long time = threadBean.getCurrentThreadCpuTime();
-
-		for (int i = 0; i < t; i++) {
-			file.add(i);
-		}
-		while (!file.isEmpty()) {
-			file.poll();
-		}
-
-		time = threadBean.getCurrentThreadCpuTime() - time;
-		System.out.println(file.getClass() + " - ajout/retrait: " + (time / diviseur));
-
-	}
-
-	
 }
 
 

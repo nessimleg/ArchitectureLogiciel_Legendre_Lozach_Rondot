@@ -29,39 +29,54 @@ public interface Liste<E> extends Iterable<E> {
 	 * Services
 	 */
 	default Iterator<E> iterator() {
-		return new IterateurListe<E>(); // Compléter puis utiliser IterateurListe.
+		return new IterateurListe<E>(this);
 	}
-	
-	//complexite en o(n^2/2) avec n la longueur de la liste
 	default Liste<E> miroir(){
-		Liste<E> l1 = cons(this.tete(), vide());
-		Liste<E> l2 = this;
-		while (l1.taille()!=this.taille()) {
-			l1 = cons(l2.tete(), l1);
-			l2 = this.reste();
+		Liste<E> r = vide();
+		for(E e : this){
+			r = cons(e, r);
 		}
-		return l2;
+		return r;
 	}
-	
-	
 	/*
 	 * Fabriques (statiques)
 	 */
 	
+	
 	public static <E> Liste<E> vide() {
 		return new Liste<E>() {
-			public boolean casVide() {
+			@Override
+			public boolean casVide(){
 				return true;
 			}
+			@Override
+			public int taille() {
+				return 0;
+			}
+			
 		};
 	}
 	
 	public static <E> Liste<E> cons(E t, Liste<E> r) {
 		return new Liste<E>() {
-			public boolean casCons() {
+			private int taille = r.taille() + 1;
+			@Override
+			public boolean casCons(){
 				return true;
 			}
+			public E tete() {
+				return t;
+			}
+			public Liste<E> reste() {
+				return r;
+			}
+			@Override
+			public int taille() {
+				return this.taille;
+			}
+			
 		};
 	}
+
 	
 }

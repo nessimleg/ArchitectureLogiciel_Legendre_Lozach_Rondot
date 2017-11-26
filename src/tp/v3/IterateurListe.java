@@ -1,12 +1,12 @@
-package tp.v2;
+package tp.v3;
 
 import java.util.Iterator;
 
-public class IterateurListe<E> implements Iterator<E> {
+public class IterateurListe<K extends Liste<K, E>, E> implements Iterator<E> {
 
-	private Liste<E> courant;
+	private K courant;
 
-	public IterateurListe(Liste<E> liste) {
+	public IterateurListe(K liste) {
 		this.courant = liste;
 	}
 

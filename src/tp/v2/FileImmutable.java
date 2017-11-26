@@ -10,7 +10,9 @@ public interface FileImmutable<E> extends File<E> {
 	/*
 	 * Fabriques
 	 */
+	@Override
 	FileImmutable<E> creer();
+
 	FileImmutable<E> creer(E dernier);
 	
 	/*
@@ -18,11 +20,11 @@ public interface FileImmutable<E> extends File<E> {
 	 */
 	@Override
 	default FileImmutable<E> ajout(E dernierDansFile) {
-		return creer(dernierDansFile);
+		return this.creer(dernierDansFile);
 	}
 	@Override
 	default FileImmutable<E> retrait() {
-		return suivants();
+		return this.suivants();
 	}
 	// Complexité O(|secondeFile|)
 	@Override
@@ -33,6 +35,5 @@ public interface FileImmutable<E> extends File<E> {
 		}
 		return r;
 	}
-
 
 }
